@@ -1,8 +1,12 @@
 const {
     app,
-    BrowserWindow
+    BrowserWindow,
+    dialog
 } = require('electron');
 const path = require('path');
+const fs = require('fs')
+const generate = require('csv-generate/lib/sync')
+const assert = require('assert')
 
 // create Window Main func
 function crWiMa() {
@@ -13,18 +17,21 @@ function crWiMa() {
             preload: path.join(__dirname, 'preload.js')
         }
     })
+    // Load html file
     veMa.loadFile('./src/public/views/index.html')
+    // Open the DevTools.
+    veMa.webContents.openDevTools()
 };
 
-// call crwima
+// call ceatewindowmain func
 app.whenReady().then(crWiMa);
 
-// macOS compatibilty
+// compatibilty
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
 
-// macOs compatiblity
+// compatiblity
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) crWiMa();
 })
