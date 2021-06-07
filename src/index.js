@@ -7,8 +7,8 @@ const csv = require('csv');
 const fs = require('fs');
 const path = require('path');
 
-// show dialog
-function crWiPr() {
+// create Window Main func
+function crWiMa() {
     let veMa = new BrowserWindow({
         width: 800,
         height: 400,
@@ -18,4 +18,16 @@ function crWiPr() {
     })
     veMa.loadFile('./src/public/views/index.html')
 };
-app.whenReady().then(crWiPr);
+
+// call crwima
+app.whenReady().then(crWiMa);
+
+// macOS compatibilty
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit();
+});
+
+// macOs compatiblity
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) crWiMa();
+})
