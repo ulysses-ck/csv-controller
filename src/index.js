@@ -1,10 +1,7 @@
 const {
     app,
-    BrowserWindow,
-    dialog
+    BrowserWindow
 } = require('electron');
-const csv = require('csv');
-const fs = require('fs');
 const path = require('path');
 
 // create Window Main func
